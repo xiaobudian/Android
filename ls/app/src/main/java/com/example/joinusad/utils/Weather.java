@@ -1,4 +1,4 @@
-package com.example.joinusad.ls;
+package com.example.joinusad.utils;
 
 import android.os.Environment;
 
@@ -92,7 +92,7 @@ public class Weather{
             return true;
         JSONObject obj = new JSONObject(weatherInfo);
         String last_update = obj.getString("last_update");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
         Date date = sdf.parse(last_update);
         Date now = new Date();

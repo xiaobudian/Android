@@ -1,4 +1,4 @@
-package com.example.joinusad.ls;
+package com.example.joinusad.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;

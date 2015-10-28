@@ -1,9 +1,6 @@
 package com.example.joinusad.utils;
 
-import android.os.Environment;
-
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
@@ -13,10 +10,8 @@ import java.util.Date;
  * Created by Administrator on 2015/10/26.
  */
 public class Weather{
-    private String fileName = "weatherinfo.txt";
-    private String encoding = "utf-8";
-    private File extDir = Environment.getExternalStorageDirectory();
 
+    private String fileName = "weatherinfo.txt";
     private String city;
     private String date;
     private String day;
@@ -56,7 +51,8 @@ public class Weather{
         sb.append(desc+"：\n");
         String result = sb.toString();
         try {
-            File file = new File(extDir.getPath() + "/" + fileName);
+            File file = new File(GlobalSettings.getInstance().extDir.getPath() + "/" +
+                    GlobalSettings.getInstance().weatherCanReadFilePath);
             FileOutputStream fout = new FileOutputStream(file, false);
             byte[] bytes = result.getBytes();
             fout.write(bytes);

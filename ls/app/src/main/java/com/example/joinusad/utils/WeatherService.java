@@ -1,6 +1,5 @@
 package com.example.joinusad.utils;
 
-import android.os.Environment;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,19 +16,14 @@ import java.io.OutputStreamWriter;
  * Created by Administrator on 2015/10/27.
  */
 public class WeatherService {
-    private static String fileName = "weather.txt";;
-    private static String encoding = "utf-8";
-    private static File extDir = Environment.getExternalStorageDirectory();
-    private static String weatherAPIurl = "https://api.thinkpage.cn/v2/weather/all.json?" +
-            "city=beijing&key=3TZQULQE1G";
 
-    private static String getWeather() throws JSONException {
+    public static String getWeather() throws JSONException {
         JSONObject obj = null;
         JSONArray array = null;
         String response = null;
-        Integer count = 4;
+        Integer count = GlobalSettings.getInstance().requestCount;
         while (response == null && count > 0) {
-            response = HttpRequest.sendGet(weatherAPIurl);
+            response = HttpRequest.sendGet(GlobalSettings.getInstance().weatherAPIurl);
             count -= 1;
         }
         obj = new JSONObject(response);
@@ -38,13 +32,14 @@ public class WeatherService {
         return obj.toString();
     }
 
-    private static String readFileData() throws IOException {
+    public static String readFileData() throws IOException {
 
         String content = "";
-        File file = new File(extDir, fileName);
+        File file = new File(GlobalSettings.getInstance().extDir,
+                GlobalSettings.getInstance().weatherFilePath);
         if (file.isFile() && file.exists()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(file), encoding));
+                    new FileInputStream(file), GlobalSettings.getInstance().encoding));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 content += line + "\n";
@@ -57,14 +52,16 @@ public class WeatherService {
         return content;
     }
 
-    private static void writeFileData(String text) {
+    public static void writeFileData(String text) {
 
         if (text == null || text.length() == 0)
             return;
         try {
-            File file = new File(extDir.getPath() + "/" + fileName);
+            File file = new File(GlobalSettings.getInstance().extDir.getPath() + "/" +
+                        GlobalSettings.getInstance().weatherFilePath);
             FileOutputStream fout = new FileOutputStream(file, false);
-            OutputStreamWriter osw = new OutputStreamWriter(fout, encoding);
+            OutputStreamWriter osw = new OutputStreamWriter(fout,
+                    GlobalSettings.getInstance().encoding);
             BufferedWriter writer = new BufferedWriter(osw);
             writer.write(text);
             writer.flush();
@@ -72,22 +69,5 @@ public class WeatherService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static Weather getWeatherInfo() throws  Exception{
-            String  weatherInfo = readFileData();
-            Weather  weather = null;
-            if (weather.expired(weatherInfo))
-                weatherInfo = "";
-            if (weatherInfo.length() == 0) {
-                weatherInfo = getWeather();
-                if (weatherInfo == null)
-                    return null;
-                writeFileData(weatherInfo);
-            }
-            weather = new Weather();
-            weather.setData(weatherInfo);
-
-        return weather;
     }
 }

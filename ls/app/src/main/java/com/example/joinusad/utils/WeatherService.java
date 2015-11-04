@@ -21,9 +21,9 @@ public class WeatherService {
         JSONObject obj = null;
         JSONArray array = null;
         String response = null;
-        Integer count = GlobalSettings.getInstance().requestCount;
+        Integer count = GlobalSettings.requestCount;
         while (response == null && count > 0) {
-            response = HttpRequest.sendGet(GlobalSettings.getInstance().weatherAPIurl);
+            response = HttpRequest.sendGet(GlobalSettings.weatherAPIurl);
             count -= 1;
         }
         obj = new JSONObject(response);
@@ -35,11 +35,11 @@ public class WeatherService {
     public static String readFileData() throws IOException {
 
         String content = "";
-        File file = new File(GlobalSettings.getInstance().extDir,
-                GlobalSettings.getInstance().weatherFilePath);
+        File file = new File(GlobalSettings.extDir,
+                GlobalSettings.weatherFilePath);
         if (file.isFile() && file.exists()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(file), GlobalSettings.getInstance().encoding));
+                    new FileInputStream(file), GlobalSettings.encoding));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 content += line + "\n";
@@ -57,11 +57,11 @@ public class WeatherService {
         if (text == null || text.length() == 0)
             return;
         try {
-            File file = new File(GlobalSettings.getInstance().extDir.getPath() + "/" +
-                        GlobalSettings.getInstance().weatherFilePath);
+            File file = new File(GlobalSettings.extDir.getPath() + "/" +
+                        GlobalSettings.weatherFilePath);
             FileOutputStream fout = new FileOutputStream(file, false);
             OutputStreamWriter osw = new OutputStreamWriter(fout,
-                    GlobalSettings.getInstance().encoding);
+                    GlobalSettings.encoding);
             BufferedWriter writer = new BufferedWriter(osw);
             writer.write(text);
             writer.flush();

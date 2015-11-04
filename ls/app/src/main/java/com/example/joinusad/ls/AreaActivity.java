@@ -75,7 +75,7 @@ public class AreaActivity extends AppCompatActivity {
         city=(Spinner)findViewById(R.id.spinner_c);
         area=(Spinner)findViewById(R.id.spinner_t);
         pullProvince=new PullProvince(mHandler);
-        File file = new File(GlobalSettings.getInstance().extDir,"area.xml");
+        File file = new File(GlobalSettings.extDir,"area.xml");
         InputStream inStream = null;
         try {
             inStream = new FileInputStream(file);

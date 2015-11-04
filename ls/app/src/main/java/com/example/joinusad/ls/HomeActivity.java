@@ -28,6 +28,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.CountDownTimer;
 import android.widget.Toast;
+
+import com.example.joinusad.utils.LocationHelper;
 import com.example.joinusad.utils.NetHelper;
 import com.example.joinusad.utils.Weather;
 import com.example.joinusad.utils.WeatherService;
@@ -174,31 +176,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void getLocation() {
 
-        //获取地理位置管理器
-        locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-        List<String> providers = locationManager.getAllProviders();
-        //获取所有可用的位置提供器
-        if(providers.contains(LocationManager.GPS_PROVIDER)
-                &&locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            //如果是GPS
-            locationProvider = LocationManager.GPS_PROVIDER;
-        }else if(providers.contains(LocationManager.NETWORK_PROVIDER)
-                &&locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-            //如果是Network
-            locationProvider = LocationManager.NETWORK_PROVIDER;
-        }else{
-            Toast.makeText(HomeActivity.this, "没有可用的位置提供器", Toast.LENGTH_SHORT).show();
-            return ;
-        }
-        //获取Location
-        Location location = locationManager.getLastKnownLocation(locationProvider);
-        if(location!=null){
-            //不为空,显示地理位置经纬度
-           // showLocation(location);
-            showCityName(location);
-        }
-        //监视地理位置变化
-        locationManager.requestLocationUpdates(locationProvider, 3000, 1, locationListener);
+
     }
 
     /**

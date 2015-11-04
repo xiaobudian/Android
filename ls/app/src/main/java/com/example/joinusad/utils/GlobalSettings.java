@@ -8,23 +8,13 @@ import java.io.File;
  */
 public class GlobalSettings {
 
-    public String weatherFilePath = "weatherInfo.txt";
-    public String weatherCanReadFilePath = "weatherCanRead.txt";
-    public File extDir = Environment.getExternalStorageDirectory();
-    public String weatherAPIurl = "https://api.thinkpage.cn/v2/weather/all.json?" +
+    public static String weatherFilePath = "weatherInfo.txt";
+    public static String weatherCanReadFilePath = "weatherCanRead.txt";
+    public static File extDir = Environment.getExternalStorageDirectory();
+    public static String weatherAPIurl = "https://api.thinkpage.cn/v2/weather/all.json?" +
             "city=beijing&key=3TZQULQE1G";
-    public String encoding = "utf-8";
-    public Integer requestCount = 4;
-    private static GlobalSettings instance;
+    public static String encoding = "utf-8";
+    public static Integer requestCount = 4;
+    public static final int Message_Toast = 1;
 
-    public static GlobalSettings getInstance() {
-        if (instance == null) {
-            synchronized (GlobalSettings.class) {
-                if (instance == null) {
-                    instance = new GlobalSettings();
-                }
-            }
-        }
-        return instance;
-    }
 }

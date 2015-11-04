@@ -51,8 +51,8 @@ public class Weather{
         sb.append(desc+"：\n");
         String result = sb.toString();
         try {
-            File file = new File(GlobalSettings.getInstance().extDir.getPath() + "/" +
-                    GlobalSettings.getInstance().weatherCanReadFilePath);
+            File file = new File(GlobalSettings.extDir.getPath() + "/" +
+                    GlobalSettings.weatherCanReadFilePath);
             FileOutputStream fout = new FileOutputStream(file, false);
             byte[] bytes = result.getBytes();
             fout.write(bytes);

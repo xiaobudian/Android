@@ -49,4 +49,47 @@
         android:layout_centerHorizontal="true"
         android:height="300dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/cityTextView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLocation"
+        android:layout_below="@+id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:text="获取地理信息" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_p"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toLeftOf="@+id/btnLocation"
+        android:layout_toStartOf="@+id/btnLocation" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_c"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignLeft="@+id/btnLocation"
+        android:layout_alignStart="@+id/btnLocation" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_t"
+        android:layout_alignBottom="@+id/spinner_p"
+        android:layout_toRightOf="@+id/cityTextView"
+        android:layout_toEndOf="@+id/cityTextView" />
+
 </RelativeLayout>
